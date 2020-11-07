@@ -11,17 +11,20 @@ namespace segment_tree {
 
 template <typename T>
 SegmentTree<T>::SegmentTree(std::vector<T> &data) :
-	data_(4 * data.size())
+	data_(4 * data.size()),
+	size_(data.size())
 {
 	this->build(data, 0, data.size() - 1, 0);
 }
 
 template <typename T>
 void SegmentTree<T>::print() {
-	for (auto e : this->data_) {
-		std::cout << e << ' ';
-	}
-	std::cout << std::endl;
+	// for (int i = 0; i < this->size_; i++) {
+	// 	std::cout << this->data_[i] << ' ';
+	// }
+	// std::cout << std::endl;
+
+	this->print(0, this->size_ - 1, 0, 0);
 }
 
 template <typename T>
@@ -44,6 +47,22 @@ void SegmentTree<T>::build(std::vector<T> &data, int low, int high, int root) {
 template <typename T>
 T SegmentTree<T>::range_query(int low, int high, int, int, int root) {
 
+}
+
+template <typename T>
+void SegmentTree<T>::print(int low, int high, int root, int depth) {
+	int mid = (low + high) / 2;
+
+	if (low != high)
+		this->print(mid + 1, high, 2 * root + 2, depth + 1);
+
+	for (int i = 0; i < depth; i++) {
+		std::cout << "    ";
+	}
+	std::cout << this->data_[root] << std::endl;
+
+	if (low != high)
+		this->print(low, mid, 2 * root + 1, depth + 1);
 }
 
 } // namespace segment_tree

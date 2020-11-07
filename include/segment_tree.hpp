@@ -11,6 +11,7 @@ template <typename T>
 class SegmentTree {
 private:
 	std::vector<T> data_;
+	int size_;
 
 public:
 	SegmentTree(std::vector<T> &);
@@ -20,6 +21,7 @@ public:
 private:
 	void build(std::vector<T> &, int, int, int);
 	T range_query(int, int, int, int, int);
+	void print(int, int, int, int);
 };
 
 } // namespace segment_tree
